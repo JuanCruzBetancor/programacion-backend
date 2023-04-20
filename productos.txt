@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "Manzana",
+    "description": "Lo mejor a tu mesa, manzanas rojas y sabrosas.",
+    "price": 250,
+    "thumbnail": "www.manzana.com",
+    "stock": 100
+  },
+  {
+    "id": 2,
+    "title": "Naranja",
+    "description": "Lo mejor a tu mesa, naranjas jugosas y sabrosas.",
+    "price": 350,
+    "thumbnail": "www.naranja.com",
+    "stock": 100
+  },
+  {
+    "id": 3,
+    "title": "Sandia",
+    "description": "Lo mejor a tu mesa, sandias dulces y sabrosas.",
+    "price": 200,
+    "thumbnail": "www.sandia.com",
+    "stock": 100
+  },
+  {
+    "id": 4,
+    "title": "Palta",
+    "description": "Lo mejor a tu mesa, palta.",
+    "price": 950,
+    "thumbnail": "www.palta.com",
+    "stock": 100
+  }
+]

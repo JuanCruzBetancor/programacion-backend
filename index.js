@@ -1,53 +1,117 @@
-class ProductManager{
-    constructor(){
-        this.products = [];
+const fs = require("fs");
+
+class ProductManager {
+    constructor() {
+        this.path = "./productos.txt";
+        if (!fs.existsSync(this.path)) {
+        fs.writeFileSync(this.path, "[]");
+        }
     }
 
-    getProducts(){
-        return this.products;
-    }
-
-    addProduct(title, description, price, thumbnail, stock){
-        const product = {
-            id: this.#nuevoId() + 1,
-            title,
-            description,
-            price: price,
-            thumbnail,
-            stock,
+    async addProduct(product) {
+        const products = await this.getProducts();
+        const newProduct = {
+        id: products.length + 1,
+        ...product,
         };
-        if (!title || !description || !price || !thumbnail || !stock) {
-            console.error("Todos los campos son obligatorios");
-            return;
-        }
-        this.products.push(product);
+        products.push(newProduct);
+        await this.updateProducts(products);
+        console.log("Producto agregado correctamente");
     }
 
-    #nuevoId(){
-        let maxId = 0;
-        this.products.map((product) => {
-            if(product.id > maxId) maxId = product.id;
+    async getProducts() {
+        const data = await fs.promises.readFile(this.path, "utf-8");
+        return JSON.parse(data);
+    }
+
+    async getProductById(id) {
+        const products = await this.getProducts();
+        const product = products.find((p) => p.id === id);
+        if (!product) {
+        console.error("Producto no encontrado");
+        return null;
+        }
+        return product;
+    }
+
+    async updateProduct(id, fieldsToUpdate) {
+        const products = await this.getProducts();
+        const productIndex = products.findIndex((p) => p.id === id);
+        if (productIndex === -1) {
+        console.error("Producto no encontrado");
+        return null;
+        }
+        products[productIndex] = {
+        ...products[productIndex],
+        ...fieldsToUpdate,
+        id: id,
+        };
+        await this.updateProducts(products);
+        console.log("Producto actualizado correctamente");
+        return products[productIndex];
+    }
+
+    async deleteProduct(id) {
+        const products = await this.getProducts();
+        const productIndex = products.findIndex((p) => p.id === id);
+        if (productIndex === -1) {
+        console.error("Producto no encontrado");
+        return null;
+        }
+        products.splice(productIndex, 1);
+        await this.updateProducts(products);
+        console.log("Producto eliminado correctamente");
+        return true;
+    }
+
+    async updateProducts(products) {
+        await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
+    }
+    }
+
+    const productManager = new ProductManager();
+
+    productManager
+    .addProduct({
+        title: "Manzana",
+        description: "Lo mejor a tu mesa, manzanas rojas y sabrosas.",
+        price: 250,
+        thumbnail: "www.manzana.com",
+        stock: 100,
+    })
+    .then(() => {
+        return productManager.addProduct({
+        title: "Naranja",
+        description: "Lo mejor a tu mesa, naranjas jugosas y sabrosas.",
+        price: 350,
+        thumbnail: "www.naranja.com",
+        stock: 100,
         });
-        return maxId;
-    }id
-
-    getProductById(idProduct) {
-        const product = this.products.find(product => product.id === idProduct);
-        if (product) {
-            return product;
-        } else {
-            console.error("Not found");
-        }
-    }
-}
-const productManager = new ProductManager();
-productManager.addProduct('Manzana','Lo mejor a tu meza, manzanas rojas y sabrosas.', 250, 'www.manzana.com', 100);
-productManager.addProduct('Naranja','Lo mejor a tu meza, naranjas jugosas y sabrosas.', 350, 'www.naranja.com', 100);
-productManager.addProduct('Sandia','Lo mejor a tu meza, sandias dulces y sabrosas.', 200, 'www.sandia.com', 100);
-productManager.addProduct('Palta','Lo mejor a tu meza, palta.', 950, 'www.palta.com', 100);
-console.log(productManager.getProducts())
-console.log(productManager.getProductById(1));
-// console.log(productManager.getProductById(2));
-// console.log(productManager.getProductById(3));
-// console.log(productManager.getProductById(4));
-// console.log(productManager.getProductById(8));
+    })
+    .then(() => {
+        return productManager.addProduct({
+        title: "Sandia",
+        description: "Lo mejor a tu mesa, sandias dulces y sabrosas.",
+        price: 200,
+        thumbnail: "www.sandia.com",
+        stock: 100,
+        });
+    })
+    .then(() => {
+        return productManager.addProduct({
+        title: "Palta",
+        description: "Lo mejor a tu mesa, palta.",
+        price: 950,
+        thumbnail: "www.palta.com",
+        stock: 100,
+        });
+    })
+    .then(() => {
+        console.log("Listado de productos:");
+        return productManager.getProducts();
+    })
+    .then((products) => {
+        console.log(products);
+        console.log("Producto con id 1:");
+        return
+    })
