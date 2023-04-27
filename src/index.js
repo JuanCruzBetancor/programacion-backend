@@ -1,11 +1,8 @@
-const fs = require("fs");
+import fs from 'fs/promises';
 
-class ProductManager {
-    constructor() {
-        this.path = "./productos.txt";
-        if (!fs.existsSync(this.path)) {
-        fs.writeFileSync(this.path, "[]");
-        }
+    export default class ProductManager {
+    constructor(path) {
+        this.path = path;
     }
 
     async addProduct(product) {
@@ -20,9 +17,10 @@ class ProductManager {
     }
 
     async getProducts() {
-        const data = await fs.promises.readFile(this.path, "utf-8");
-        return JSON.parse(data);
+        const products = await fs.readFile(this.path, "utf-8");
+        return JSON.parse(products);
     }
+    
 
     async getProductById(id) {
         const products = await this.getProducts();
@@ -65,53 +63,7 @@ class ProductManager {
     }
 
     async updateProducts(products) {
-        await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
+        await fs.writeFile(this.path, JSON.stringify(products, null, 2));
     }
-    }
+}
 
-    const productManager = new ProductManager();
-
-    productManager
-    .addProduct({
-        title: "Manzana",
-        description: "Lo mejor a tu mesa, manzanas rojas y sabrosas.",
-        price: 250,
-        thumbnail: "www.manzana.com",
-        stock: 100,
-    })
-    .then(() => {
-        return productManager.addProduct({
-        title: "Naranja",
-        description: "Lo mejor a tu mesa, naranjas jugosas y sabrosas.",
-        price: 350,
-        thumbnail: "www.naranja.com",
-        stock: 100,
-        });
-    })
-    .then(() => {
-        return productManager.addProduct({
-        title: "Sandia",
-        description: "Lo mejor a tu mesa, sandias dulces y sabrosas.",
-        price: 200,
-        thumbnail: "www.sandia.com",
-        stock: 100,
-        });
-    })
-    .then(() => {
-        return productManager.addProduct({
-        title: "Palta",
-        description: "Lo mejor a tu mesa, palta.",
-        price: 950,
-        thumbnail: "www.palta.com",
-        stock: 100,
-        });
-    })
-    .then(() => {
-        console.log("Listado de productos:");
-        return productManager.getProducts();
-    })
-    .then((products) => {
-        console.log(products);
-        console.log("Producto con id 1:");
-        return
-    })

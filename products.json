@@ -30,5 +30,13 @@
     "price": 950,
     "thumbnail": "www.palta.com",
     "stock": 100
+  },
+  {
+    "id": 5,
+    "title": "Papa",
+    "description": "Lo mejor a tu mesa, papas limpias.",
+    "price": 550,
+    "thumbnail": "www.papas.com",
+    "stock": 1000
   }
 ]
