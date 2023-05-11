@@ -1,24 +1,46 @@
 import express from "express";
+import { Server } from 'socket.io';
+import handlebars from 'express-handlebars';
+import { __dirname } from "./path.js";
 import bodyParser from "body-parser";
 import ProductManager from "./index.js";
 import CartManager from "./cart.manager.js";
 
+
 const app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(express.static(__dirname + '/public'));
+app.engine('handlebars', handlebars.engine());
+app.set('view engine', 'handlebars');
+app.set('views', __dirname+'/views');
 
 const productManager = new ProductManager("products.json");
-const cartManager = new CartManager("cart.json"); // crea una instancia de CartManager
+const cartManager = new CartManager("cart.json"); 
 
-const port = 8080;
+    const port = app.listen(8080, () => {
+    console.log(`Servidor escuchando en el puerto 8080`);
+});
 
-    app.listen(port, () => {
-    console.log(`Servidor escuchando en el puerto ${port}`);
+const socketServer = new Server(port);
+socketServer.on('connection', (socket) =>{
+    console.log('usuario conectado!', socket.id);
+    socket.on('disconnect', ()=>{
+        console.log('usuario desconectado!');
+    })
+    socket.on('newProduct', (product) =>{
+        productManager.addProduct(product);
+        const totalProducts = productManager.getProducts();
+        socketServer.emit('arrayProducts', totalProducts);
     });
+});
+
+
     //mostrar o traer todos los productos existentes.
-    app.get("/products", async (req, res) => {
+    app.get("/", async (req, res) => {
     const products = await productManager.getProducts();
-    res.send(products);
+    res.render('websockets', { products });
     });
     //buscar un producto por su identificador.
     app.get("/products/:id", async (req, res) => {
