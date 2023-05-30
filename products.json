@@ -1,42 +1,14 @@
 [
-  {
-    "id": 1,
-    "title": "Manzana",
-    "description": "Lo mejor a tu mesa, manzanas rojas y sabrosas.",
-    "price": 250,
-    "thumbnail": "www.manzana.com",
-    "stock": 100
-  },
-  {
-    "id": 2,
-    "title": "Naranja",
-    "description": "Lo mejor a tu mesa, naranjas jugosas y sabrosas.",
-    "price": 350,
-    "thumbnail": "www.naranja.com",
-    "stock": 100
-  },
-  {
-    "id": 3,
-    "title": "Sandia",
-    "description": "Lo mejor a tu mesa, sandias dulces y sabrosas.",
-    "price": 200,
-    "thumbnail": "www.sandia.com",
-    "stock": 100
-  },
-  {
-    "id": 4,
-    "title": "Palta",
-    "description": "Lo mejor a tu mesa, palta.",
-    "price": 950,
-    "thumbnail": "www.palta.com",
-    "stock": 100
-  },
-  {
-    "id": 5,
-    "title": "Papa",
-    "description": "Lo mejor a tu mesa, papas limpias.",
-    "price": 550,
-    "thumbnail": "www.papas.com",
-    "stock": 1000
-  }
+  {"title": "COCA COLA", "description": "Gaseosa Coca-cola Light 2.25 L", "category": "bebidas", "price": 660, "stock":200}, 
+  {"title": "7 UP", "description":"Gaseosa 7up Lima Limón 1.5l", "category": "bebidas", "price": 290, "stock": 100},
+  {"title": "PEPSI", "description":"Gaseosa Cola Pepsi Regular 2.25l", "category": "bebidas", "price": 520, "stock": 200},
+  {"title": "COCA COLA", "description":"Gaseosa Coca-cola Sabor Original 2.25 L", "category": "bebidas", "price": 560, "stock": 200}, 
+  {"title": "HILERET", "description":"Endulzante Hileret Stevia Forte X 50 Sobrecitos", "category": "almacen", "price": 650, "stock": 200},
+  {"title": "Aceite", "description":"Aceite De Girasol 1.5 L", "category": "almacen", "price": 520, "stock": 200},
+  {"title": "Sal", "description":"Sal Gruesa Dos Anclas 1 Kg", "category": "almacen", "price": 210, "stock": 200},
+  {"title": "Arroz", "description":"Grano Largo Fino 1kg", "category": "almacen", "price": 250, "stock": 200}, 
+  {"title": "Detergente", "description":"Detergente Líquido Lavavajillas Magistral Limón Ultra Desengrasante 500ml", "category": "limpieza", "price": 770, "stock": 200},
+  {"title": "Anti-Grasa", "description":"Limpiador Liquido Cif Antigrasa Biodegradable 450 Ml", "category": "limpieza", "price": 240, "stock": 100},
+  {"title": "Papel Higienico", "description":"Doble Hoja Plus 4x30m", "category": "limpieza", "price": 750, "stock": 100},
+  {"title": "Lavandina", "description":"Elimina hasta el 99% de impurezas", "category": "limpieza", "price": 220, "stock": 200}
 ]

@@ -1,37 +1,14 @@
-<div>
-    <ul>
-        {{#each products}}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{this.title}}</h5>
-                <p>Precio por kg.: ${{this.price}}</p>
-                <a href="#" class="btn btn-primary">Comprar</a>
-            </div>
-        </div>
-        <p id="products"></p>
-        {{/each}}
-            <form id="form">
-                <div class="input-group">
-                    <span class="input-group-text">Ingrese producto:</span>
-                    <input type="text" id="title" class="form-control">
-                    <span class="input-group-text">Ingrese descripcion:</span>
-                    <input type="text" id="description" class="form-control">
-                    <span class="input-group-text">Ingrese url de la imagen:</span>
-                    <input type="text" id="thumbnail" class="form-control">
-                    <p>Ingrese precio:</p>
-                    <input type="number" id="number" class="form-control">
-                    <p>Ingrese stock:</p>
-                    <input type="number" id="stock" class="form-control">
-                    <span class="input-group-text">$</span>
-                    <span class="input-group-text">0.00</span>
-                    <input type="submit"></input>
-                </div>
-            </form>
-    </ul>
+<div id="chat-container">
+    <div id="chat-window">
+        <div id="output"></div>
+        <div id="actions"></div>
+    </div>
+    <input type="text" id="username" placeholder="username" />
+    <input type="text" id="message" placeholder="message" />
+    <button id="send">Enviar</button>
 </div>
 
-
-
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="js/index.js"></scrip>
+<script src="/socket.io/socket.io.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="index.js" charset="utf-8"></script>
