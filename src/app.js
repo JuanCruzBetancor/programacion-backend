@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import ProductManager from "./daos/filesystem/index.js";
 import CartManager from "./daos/filesystem/cart.manager.js";
 import './db/database.js'
+import cartRouter from './routes/cart-router.js'
 import productRouter from "./routes/products-routes.js";
 import viewsRouter from "./routes/views-router.js"
 import  MessagesManagerMongoDB  from "./daos/mongoDB/messagesMongo.js";
@@ -19,6 +20,7 @@ app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');
 app.set('views', __dirname+'/views');
 app.use('/products', productRouter);
+app.use('/', cartRouter);
 app.use('/', viewsRouter);
 
 // const productManager = new ProductManager("products.json");

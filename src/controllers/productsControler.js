@@ -2,13 +2,46 @@ import { getAllService, getByIdService, createService, updateService, deleteServ
     
     export const getAllController = async (req, res, next) => {
         try {
-        const docs = await getAllService();
-        res.json(docs);
+            //const { sort } = req.query; => se trae la info de service para realizar la peticion.
+            //const docs = await getAllService(sort);=> se le pasa el sort para buscar por ruta.
+            const page = req.query.page || 1;
+        const { payload, totalPages, prevPage, nextPage, hasPrevPage, hasNextPage, prevLink, nextLink } = await getAllService(page);
+        
+        const response = {
+            status: "success",
+            payload,
+            totalPages,
+            prevPage,
+            nextPage,
+            page,
+            hasPrevPage,
+            hasNextPage,
+            prevLink,
+            nextLink
+        };
+
+        res.json(response);
         } catch (error) {
         next(error);
         }
     };
     
+    export const createController = async (req, res, next) => {
+        try {
+            const { title, description, category, price, stock } = req.body;
+            const newDoc = await createService.createProduct({
+                title,
+                description,
+                category,
+                price,
+                stock
+            });
+            res.json(newDoc);
+            } catch (error) {
+            next(error);
+            }
+        };
+
     export const getByIdController = async (req, res, next) => {
         try {
         const { id } = req.params;
@@ -19,7 +52,7 @@ import { getAllService, getByIdService, createService, updateService, deleteServ
         }
     };
     
-    export const createController = async (req, res, next) => {
+    export const createController2 = async (req, res, next) => {
         try {
         const { title, description, category, price, stock } = req.body;
         const newDoc = await createService({
